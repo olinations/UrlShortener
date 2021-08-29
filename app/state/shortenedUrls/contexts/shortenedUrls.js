@@ -1,16 +1,11 @@
 import * as React from 'react';
+import {shortenedState} from '../../defaultStates';
 import {shortenReducer} from '../reducers/shortenReducers';
-// constants file needed!
 
 const ShortenedContext = React.createContext();
 
 function ShortenedUrlProvider({children}) {
-  const [state, dispatch] = React.useReducer(shortenReducer, {
-    shortenedUrls: [],
-    loading: false,
-    status: 0,
-    msg: '',
-  });
+  const [state, dispatch] = React.useReducer(shortenReducer, shortenedState);
 
   const value = {state, dispatch};
 
