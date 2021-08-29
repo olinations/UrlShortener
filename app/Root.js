@@ -1,11 +1,12 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {ShortenedUrlProvider} from './state/store';
+import Shortener from './screens/Shortener';
 
 const Root = ({}) => {
   return (
-    <View>
-      <Text>Hello World!</Text>
-    </View>
+    <ShortenedUrlProvider>
+      <Shortener />
+    </ShortenedUrlProvider>
   );
 };
 
