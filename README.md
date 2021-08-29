@@ -16,4 +16,4 @@ Still to do:
 Notes:
 
 - Would not use Typescript throughout entire app, mainly just for central state and common api requests.
-- Would not worry too much about creating tests in a first version. IMO, better to build and build and build, and write tests with first hires.
+- Would not worry too much about creating tests in a first version, but should not proceed further without writing tests.
