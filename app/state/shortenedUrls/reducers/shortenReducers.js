@@ -1,6 +1,15 @@
+import {
+  START,
+  FAILED,
+  LOADURLS,
+  ADDURL,
+  REMOVEURL,
+  RESETMSG,
+} from '../constants/shortenConstants';
+
 function shortenReducer(state, action) {
   switch (action.type) {
-    case 'LOADURLS': {
+    case LOADURLS: {
       return Object.assign({}, state, {
         shortenedUrls: [...action.payload],
         status: 1,
@@ -8,13 +17,13 @@ function shortenReducer(state, action) {
         loading: false,
       });
     }
-    case 'STARTPROCESS': {
+    case START: {
       return Object.assign({}, state, {
         loading: true,
         msg: 'Processing...',
       });
     }
-    case 'FINISHEDADDINGURL': {
+    case ADDURL: {
       return Object.assign({}, state, {
         shortenedUrls: [...state.shortenedUrls, action.payload],
         status: 1,
@@ -22,13 +31,13 @@ function shortenReducer(state, action) {
         loading: false,
       });
     }
-    case 'FAILEDADDINGURL': {
+    case FAILED: {
       return Object.assign({}, state, {
         loading: false,
         msg: action.payload,
       });
     }
-    case 'REMOVEURL': {
+    case REMOVEURL: {
       const newArray = state.shortenedUrls.filter(
         item => item.slug !== action.payload,
       );
@@ -40,7 +49,7 @@ function shortenReducer(state, action) {
         loading: false,
       });
     }
-    case 'RESETMSG': {
+    case RESETMSG: {
       return Object.assign({}, state, {
         msg: '',
       });
