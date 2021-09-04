@@ -4,10 +4,10 @@ An app built with React Native. Uses context API as central store instead of Red
 
 Still to do:
 
-1. Convert to Typescript
+~1. Convert to Typescript
 
-   - add default state types
-   - add types for api responses
+- add default state types
+- add types for api responses~
 
 2. Add Tests
 
