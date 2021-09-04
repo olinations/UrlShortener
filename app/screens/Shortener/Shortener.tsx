@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {FC, useState, useEffect} from 'react';
 import {SafeAreaView, ScrollView, Text} from 'react-native';
 import {useShortened} from '../../state/shortenedUrls/contexts/shortenedUrls';
 import {
@@ -10,7 +10,7 @@ import InputUrls from './components/InputUrl';
 import Button from './components/Button';
 import {shortenerStyles} from './styles/styles';
 
-const Shortener = ({}) => {
+const Shortener: FC = ({}) => {
   const {
     dispatch,
     state: {shortenedUrls, msg, loading, status},
@@ -20,7 +20,7 @@ const Shortener = ({}) => {
   const [submitted, setSubmitted] = useState(false);
   const [showMessage, setShowMessage] = useState(true);
 
-  const handleInputChange = text => {
+  const handleInputChange = (text: string) => {
     if (submitted) {
       dispatch({type: 'RESETMSG'});
       setSubmitted(false);
@@ -41,10 +41,6 @@ const Shortener = ({}) => {
   useEffect(() => {
     setShowMessage(true);
 
-    if (removeMsg) {
-      clearTimeout(removeMsg);
-    }
-
     const removeMsg = setTimeout(() => {
       setShowMessage(false);
     }, 2000);
@@ -58,7 +54,7 @@ const Shortener = ({}) => {
 
   return (
     <SafeAreaView style={shortenerStyles.container}>
-      <ScrollView stye={shortenerStyles.scrollContainer}>
+      <ScrollView style={shortenerStyles.scrollContainer}>
         <Text style={shortenerStyles.title}>URL Shortener</Text>
         {shortenedUrls.map((url, index) => (
           <ShortenedUrl url={url} key={index + url.slug} />
