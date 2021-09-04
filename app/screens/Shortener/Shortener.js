@@ -18,6 +18,7 @@ const Shortener = ({}) => {
 
   const [url, setUrl] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [showMessage, setShowMessage] = useState(true);
 
   const handleInputChange = text => {
     if (submitted) {
@@ -36,6 +37,20 @@ const Shortener = ({}) => {
       setUrl('');
     }
   };
+
+  useEffect(() => {
+    setShowMessage(true);
+
+    if (removeMsg) {
+      clearTimeout(removeMsg);
+    }
+
+    const removeMsg = setTimeout(() => {
+      setShowMessage(false);
+    }, 2000);
+
+    return () => clearTimeout(removeMsg);
+  }, [msg]);
 
   useEffect(() => {
     loadUrls(dispatch);
@@ -57,7 +72,7 @@ const Shortener = ({}) => {
 
         <Button shortenUrl={shortenUrl} loading={loading} />
 
-        <Text>{msg}</Text>
+        {showMessage && <Text>{msg}</Text>}
       </ScrollView>
     </SafeAreaView>
   );

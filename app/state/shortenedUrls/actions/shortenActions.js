@@ -1,10 +1,4 @@
-import {
-  START,
-  FAILED,
-  LOADURLS,
-  ADDURL,
-  REMOVEURL,
-} from '../constants/shortenConstants';
+import * as types from '../constants/shortenConstants';
 
 const headerObject = {
   'GB-Access-Token': 'f010573966698b94b3333db1afdaf045',
@@ -12,7 +6,7 @@ const headerObject = {
 };
 
 async function addUrl(dispatch, url) {
-  dispatch({type: START});
+  dispatch({type: types.START});
   try {
     const request = await fetch('https://api.bely.me/links', {
       method: 'POST',
@@ -24,40 +18,40 @@ async function addUrl(dispatch, url) {
     const response = await request.json();
     // just to show loading...
     setTimeout(() => {
-      dispatch({type: ADDURL, payload: response});
+      dispatch({type: types.ADDURL, payload: response});
     }, 1000);
   } catch (error) {
     console.log(error);
-    dispatch({type: FAILED, payload: error});
+    dispatch({type: types.FAILED, payload: error});
   }
 }
 
 async function removeUrl(dispatch, slug) {
-  dispatch({type: START});
+  dispatch({type: types.START});
   try {
     await fetch('https://api.bely.me/links/' + slug, {
       method: 'DELETE',
       headers: headerObject,
     });
-    dispatch({type: REMOVEURL, payload: slug});
+    dispatch({type: types.REMOVEURL, payload: slug});
   } catch (error) {
     console.log(error);
-    dispatch({type: FAILED, payload: error});
+    dispatch({type: types.FAILED, payload: error});
   }
 }
 
 async function loadUrls(dispatch) {
-  dispatch({type: START});
+  dispatch({type: types.START});
   try {
     const request = await fetch('https://api.bely.me/links', {
       method: 'GET',
       headers: headerObject,
     });
     const response = await request.json();
-    dispatch({type: LOADURLS, payload: response});
+    dispatch({type: types.LOADURLS, payload: response});
   } catch (error) {
     console.log(error);
-    dispatch({type: FAILED, payload: error});
+    dispatch({type: types.FAILED, payload: error});
   }
 }
 
