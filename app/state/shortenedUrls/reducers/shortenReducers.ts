@@ -1,6 +1,8 @@
 import * as types from '../constants/shortenConstants';
+import {ShortenedState} from '../../defaultStates';
+import {Actions} from '../actions/actionTypes';
 
-function shortenReducer(state, action) {
+function shortenReducer(state: ShortenedState, action: Actions) {
   switch (action.type) {
     case types.LOADURLS: {
       return Object.assign({}, state, {
@@ -48,7 +50,7 @@ function shortenReducer(state, action) {
       });
     }
     default: {
-      throw new Error(`Unhandled action type: ${action.type}`);
+      throw new Error(`Unhandled action type.`);
     }
   }
 }

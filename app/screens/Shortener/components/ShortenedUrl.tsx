@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {removeUrl} from '../../../state/shortenedUrls/actions/shortenActions';
 import {useShortened} from '../../../state/shortenedUrls/contexts/shortenedUrls';
 import {shortenerStyles} from '../styles/styles';
+import {ShortenedUrlObj} from '../../../state/defaultStates';
 
-const ShortenedUrl = ({url}) => {
+const ShortenedUrl: FC<{url: ShortenedUrlObj}> = ({url}) => {
   const {
     dispatch,
     state: {loading},

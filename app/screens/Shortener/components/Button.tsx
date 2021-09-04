@@ -1,12 +1,15 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {TouchableOpacity, Text, ActivityIndicator} from 'react-native';
 import {shortenerStyles} from '../styles/styles';
 
-const Button = ({shortenUrl, loading}) => {
+interface Props {
+  shortenUrl: () => void;
+  loading: boolean;
+}
+
+const Button: FC<Props> = ({shortenUrl, loading}) => {
   return (
-    <TouchableOpacity
-      style={shortenerStyles.button}
-      onPress={() => shortenUrl()}>
+    <TouchableOpacity style={shortenerStyles.button} onPress={shortenUrl}>
       {loading ? (
         <ActivityIndicator color={'#fff'} size={'small'} />
       ) : (

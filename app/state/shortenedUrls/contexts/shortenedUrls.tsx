@@ -1,10 +1,15 @@
 import * as React from 'react';
-import {shortenedState} from '../../defaultStates';
+import {shortenedState, ShortenedState} from '../../defaultStates';
 import {shortenReducer} from '../reducers/shortenReducers';
+import {Dispatch} from '../actions/actionTypes';
 
-const ShortenedContext = React.createContext();
+type ShortenedProviderProps = {children: React.ReactNode};
 
-function ShortenedUrlProvider({children}) {
+const ShortenedContext = React.createContext<
+  {state: ShortenedState; dispatch: Dispatch} | undefined
+>(undefined);
+
+function ShortenedUrlProvider({children}: ShortenedProviderProps) {
   const [state, dispatch] = React.useReducer(shortenReducer, shortenedState);
 
   const value = {state, dispatch};
