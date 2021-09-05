@@ -20,7 +20,7 @@ const Shortener: FC = ({}) => {
   const [submitted, setSubmitted] = useState(false);
   const [showMessage, setShowMessage] = useState(true);
 
-  const handleInputChange = (text: string) => {
+  const handleInputChange = (text: string): void => {
     if (submitted) {
       dispatch({type: 'RESETMSG'});
       setSubmitted(false);
@@ -28,11 +28,11 @@ const Shortener: FC = ({}) => {
     setUrl(text);
   };
 
-  const shortenUrl = () => {
+  const shortenUrl = (): void => {
     // const properUrl = checkUrlFormat(url)
     // helper function needed before running api request
     if (url) {
-      addUrl(dispatch, url);
+      addUrl({dispatch, url});
       setSubmitted(true);
       setUrl('');
     }

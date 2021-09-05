@@ -19,7 +19,7 @@ const ShortenedUrl: FC<{url: ShortenedUrlObj}> = ({url}) => {
       <TouchableOpacity
         style={shortenerStyles.del}
         disabled={loading}
-        onPress={() => removeUrl(dispatch, url.slug)}>
+        onPress={() => removeUrl({dispatch, slug: url.slug})}>
         <Text style={shortenerStyles.delText}>x</Text>
       </TouchableOpacity>
     </View>

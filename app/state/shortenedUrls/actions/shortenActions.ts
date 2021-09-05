@@ -6,48 +6,59 @@ const headerObject = {
   'Content-Type': 'application/json',
 };
 
-async function addUrl(dispatch: Dispatch, url: string, slug?: string) {
-  dispatch({type: types.START});
+interface IAddUrl {
+  dispatch: Dispatch;
+  url: string;
+  slug?: string;
+}
+
+interface IRemoveUrl {
+  dispatch: Dispatch;
+  slug: string;
+}
+
+async function addUrl(data: IAddUrl): Promise<void> {
+  data.dispatch({type: types.START});
   try {
     const request = await fetch('https://api.bely.me/links', {
       method: 'POST',
       headers: headerObject,
       body: JSON.stringify({
-        url,
-        slug,
+        url: data.url,
+        slug: data.slug,
       }),
     });
     const response = await request.json();
 
     if (response.errors) {
-      dispatch({type: types.FAILED, payload: response.errors.url[0]});
+      data.dispatch({type: types.FAILED, payload: response.errors.url[0]});
     } else {
       // just to show loading...
       setTimeout(() => {
-        dispatch({type: types.ADDURL, payload: response});
+        data.dispatch({type: types.ADDURL, payload: response});
       }, 1000);
     }
   } catch (error) {
     console.log(error);
-    dispatch({type: types.FAILED, payload: error});
+    data.dispatch({type: types.FAILED, payload: error});
   }
 }
 
-async function removeUrl(dispatch: Dispatch, slug: string) {
-  dispatch({type: types.START});
+async function removeUrl(data: IRemoveUrl): Promise<void> {
+  data.dispatch({type: types.START});
   try {
-    await fetch('https://api.bely.me/links/' + slug, {
+    await fetch('https://api.bely.me/links/' + data.slug, {
       method: 'DELETE',
       headers: headerObject,
     });
-    dispatch({type: types.REMOVEURL, payload: slug});
+    data.dispatch({type: types.REMOVEURL, payload: data.slug});
   } catch (error) {
     console.log(error);
-    dispatch({type: types.FAILED, payload: error});
+    data.dispatch({type: types.FAILED, payload: error});
   }
 }
 
-async function loadUrls(dispatch: Dispatch) {
+async function loadUrls(dispatch: Dispatch): Promise<void> {
   dispatch({type: types.START});
   try {
     const request = await fetch('https://api.bely.me/links', {
