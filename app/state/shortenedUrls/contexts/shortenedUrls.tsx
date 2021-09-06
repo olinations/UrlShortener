@@ -1,12 +1,12 @@
 import * as React from 'react';
-import {shortenedState, ShortenedState} from '../../defaultStates';
+import {shortenedState, IShortenedUrlsState} from '../../defaultStates';
 import {shortenReducer} from '../reducers/shortenReducers';
 import {Dispatch} from '../actions/actionTypes';
 
 type ShortenedProviderProps = {children: React.ReactNode};
 
 const ShortenedContext = React.createContext<
-  {state: ShortenedState; dispatch: Dispatch} | undefined
+  {state: IShortenedUrlsState; dispatch: Dispatch} | undefined
 >(undefined);
 
 function ShortenedUrlProvider({children}: ShortenedProviderProps) {

@@ -1,12 +1,12 @@
 import * as types from '../constants/shortenConstants';
 
-export interface LoadUrlPayload {
+export interface ILoadUrlPayload {
   short_url: string;
   slug: string;
   url: string;
 }
 
-export interface AddUrlPayload {
+export interface IAddUrlPayload {
   short_url: string;
   slug: string;
   url: string;
@@ -14,8 +14,8 @@ export interface AddUrlPayload {
 
 export type Actions =
   | {type: typeof types.START}
-  | {type: typeof types.LOADURLS; payload: LoadUrlPayload[]}
-  | {type: typeof types.ADDURL; payload: AddUrlPayload}
+  | {type: typeof types.LOADURLS; payload: ILoadUrlPayload[]}
+  | {type: typeof types.ADDURL; payload: IAddUrlPayload}
   | {type: typeof types.FAILED; payload: string}
   | {type: typeof types.REMOVEURL; payload: string}
   | {type: typeof types.RESETMSG};

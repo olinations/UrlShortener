@@ -1,16 +1,16 @@
-export interface ShortenedUrlObj {
+export interface IShortenedUrl {
   url: string;
   short_url: string;
   slug: string;
 }
-export interface ShortenedState {
-  shortenedUrls: ShortenedUrlObj[];
+export interface IShortenedUrlsState {
+  shortenedUrls: IShortenedUrl[];
   loading: boolean;
   status: number;
   msg: string;
 }
 
-export const shortenedState: ShortenedState = {
+export const shortenedState: IShortenedUrlsState = {
   shortenedUrls: [],
   loading: false,
   status: 0,
