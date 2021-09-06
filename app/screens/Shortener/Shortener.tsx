@@ -9,6 +9,7 @@ import ShortenedUrl from './components/ShortenedUrl';
 import InputUrls from './components/InputUrl';
 import Button from './components/Button';
 import {shortenerStyles} from './styles/styles';
+import {IShortenedUrl} from '../../state/defaultStates';
 
 const Shortener: FC = ({}) => {
   const {
@@ -56,8 +57,13 @@ const Shortener: FC = ({}) => {
     <SafeAreaView style={shortenerStyles.container}>
       <ScrollView style={shortenerStyles.scrollContainer}>
         <Text style={shortenerStyles.title}>URL Shortener</Text>
-        {shortenedUrls.map((url, index) => (
-          <ShortenedUrl url={url} key={index + url.slug} />
+        {shortenedUrls.map((data: IShortenedUrl, index: number) => (
+          <ShortenedUrl
+            url={data.url}
+            short_url={data.short_url}
+            slug={data.slug}
+            key={+index}
+          />
         ))}
 
         <InputUrls

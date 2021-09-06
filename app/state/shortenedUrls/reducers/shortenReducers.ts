@@ -1,8 +1,8 @@
 import * as types from '../constants/shortenConstants';
-import {ShortenedState} from '../../defaultStates';
+import {IShortenedUrlsState} from '../../defaultStates';
 import {Actions} from '../actions/actionTypes';
 
-function shortenReducer(state: ShortenedState, action: Actions) {
+function shortenReducer(state: IShortenedUrlsState, action: Actions) {
   switch (action.type) {
     case types.LOADURLS: {
       return Object.assign({}, state, {
